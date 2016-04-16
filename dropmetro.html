@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pick Your Geography</title>
+  <div>
+  <link rel="stylesheet" href="style.css" media="screen" />
+  </div>
+<style>
+.dropbtn {
+    background-color: #707070;
+    color: #FDFF06;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #707070;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 100px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #707070;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: #FDFF06;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #707070}
+
+.show {display:block;}
+</style>
+  
+</head>
+<body>
+<p>
+        <img src="http://i.imgur.com/BBX8X10.jpg?1"
+        alt="Pdoc" height="291" width="100%"/>
+        </p>
+        <p>
+        <a href="http://mstepniak48201.github.io/index.html" class="button">Home</a>
+        <a href="http://mstepniak48201.github.io/index.html" class="button">About</a>
+        <a href="http://mstepniak48201.github.io/download.html" class="button">Data Downloads</a>
+        </p>
+        <div id="page-wrap">
+        <h1>Mapping Demographics in Metropolitan Detroit</h1>
+        </div>
+    
+<h2>Where do you need to find data in Metro Detroit?</h2>
+<p>Scroll down, and click on a place within the yellow-highlighted area on the map below. This will take you to the download page for the county you have selected. Or, use the dropdown menu to the right of the map to find information on the entire State of Michigan and custom geographies.</p>
+
+<div class="dropdown" style="float:right;">
+<button onclick="myFunction()" class="dropbtn">Pick Another Geography</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="http://stackoverflow.com/questions/1213281/does-javascript-have-to-be-in-the-head-tags">State of Michigan</a>
+    <a href="#about">Custom Geography 1</a>
+    <a href="#contact">Custom Geography 2</a>
+  </div>
+</div>
+    
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+    
+<img src="http://i.imgur.com/czlPm7n.jpg?1" alt="TriCo" usemap="#tricomap" style="width:1000x;height:527px;">
+
+<map name="tricomap">
+
+<map name="tricomap">
+  <area shape="poly" coords="249,20,365,18,368,131,309,133,310,163,251,164" alt="Genesee" href="Mstepniak48201.github.io/download.html">
+  <area shape="poly" coords="480,39,600,32,602,48,621,83,622,99,600,215,584,235,549,185,545,124,484,125" alt="StClair" href="http://www.catgifpage.com/gifs/318.gif">
+  <area shape="poly" coords="544,125,457,128,464,272,513,270,550,192,546,187" alt="Macomb" href="http://www3.pictures.zimbio.com/mp/H8JEvcFcbjxl.gif">
+  <area shape="poly" coords="311,135,375,134,452,130,459,272,318,279" alt="Oakland" href="https://33.media.tumblr.com/5c5e1cfea31f1d6e490cc00581d95179/tumblr_mvg6t3TnPO1sig9gio1_400.gif">
+  <area shape="poly" coords="347,282,512,274,507,302,472,313,456,335,449,409,438,408,414,391,351,392" alt="Wayne" href="http://www.drodd.com/images8/funny-gif/funny-gif15.gif">
+  <area shape="poly" coords="201,286,343,282,346,392,201,398" alt="Washtenaw" href="http://p.fod4.com/upload/aff3567c9abaad4b798a350dc1e1b1a3/snK0IH4fR1GnDAkfktIt_Sleepy%20Meerkat.gif">
+  <area shape="poly" coords="292,398,409,394,436,415,373,510,295,514" alt="Monroe" href="https://assets-animated.rbl.ms/454314/980x.gif">
+</map>
+
+</body>
+</html>
