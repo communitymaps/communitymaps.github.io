@@ -18,9 +18,7 @@ a.black:active {color: black; font-weight: bold;}
 a.black:visited {color: black; font-weight: bold;}
 a.black:hover {color: black; font-weight: bold;}
 
-div {
-    margin-top: 10px;
-}
+
 
 #page-wrap {
     background-color: #707070;
