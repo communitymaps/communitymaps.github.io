@@ -10,6 +10,8 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+     
+        
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         
     <style>
@@ -71,16 +73,22 @@
     
         
     <script>
-        L.mapbox.accessToken = 'pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA';
-        var map = L.map('map').setView([42.431572, -83.294734], 10);
-        
-     L.tileLayer(
-    'https://api.mapbox.com/styles/v1/mstepniak/cinamx0jk000kackp9r7jjbsi/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+    var map = L.map('map').setView([42.431572, -83.294734], 10);
+  var toolserver = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinby8bji005db0nm4fyndkzp/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
         tileSize: 512,
         zoomOffset: -1,
-        attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+        attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'     
+  });
+  var stamen = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinamx0jk000kackp9r7jjbsi/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+
+  var baseLayers = {"2000": stamen, "2010":toolserver};
+  L.control.layers(baseLayers).addTo(map);
         
+        
+   
     $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/v.geojson', function (data) {
     L.geoJson(data, {
             /*
