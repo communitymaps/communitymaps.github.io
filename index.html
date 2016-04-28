@@ -40,11 +40,34 @@
       height: 520px;
       width:100%; }
         
+    .leaflet-popup-content-wrapper {
+      background: #707070;
+        }
+
+    .leaflet-popup-tip-container {
+      background: #707070, 0, 0;
+        }
+        
+    .leaflet-popup-tip {
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:20px solid #707070;
+        }
+
+    .leaflet-popup {
+      color: #FDFF06;
+      font-size: 15px;
+        }
+    #popwrap {
+      background-color: #FDFF06;
+      color: #707070;
+      padding: 10px;
+      font-weight: bold;
+        }        
+    
+        
     </style>
-    <!--
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-   -->
+    
     </head>
     <body>
         <p>
@@ -74,31 +97,34 @@
         
     <script>
     var map = L.map('map').setView([42.431572, -83.294734], 10);
-  var toolserver = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinby8bji005db0nm4fyndkzp/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
+        
+        
+
+  
+        
+        
+  var CensusA = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinamx0jk000kackp9r7jjbsi/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
         tileSize: 512,
         zoomOffset: -1,
         attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'     
   });
-  var stamen = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinamx0jk000kackp9r7jjbsi/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
+  var CensusB = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinby8bji005db0nm4fyndkzp/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
         tileSize: 512,
         zoomOffset: -1,
         attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 
-  var baseLayers = {"2000": stamen, "2010":toolserver};
+  var baseLayers = {"2010": CensusB, "2000":CensusA};
   L.control.layers(baseLayers).addTo(map);
-        
-        
+
    
-    $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/v.geojson', function (data) {
+    $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/u.geojson', function (data) {
     L.geoJson(data, {
-            /*
-             * Add a popup to each "layer" (shape in the GeoJSON),
-             * in this case the popup simply contains the NAME property.
-             */
-            onEachFeature: function (feature, layer) {
-              layer.bindPopup('name: ' + feature.properties.C_NAMELSAD);
-            },
-            style: {
+           
+        
+         onEachFeature: function (feature, layer){
+               layer.bindPopup('<div id="popwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'Percentage African American: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'Median Household Income: $' + feature.properties.x_Med_Inc + '</br>' + 'Total Population: ' + feature.properties.y_Total_);
+           },
+      style: {
                 color: "black",
                 weight: 2,
                 fillOpacity: .05
