@@ -18,15 +18,14 @@
         
     #container {
       position: relative;
-      height: 600px;
+      height: 520px;
       margin-top: 20px;
       margin-right: 20px;
       margin-left: 20px;
-      margin-bottom: 20px;
          }
         
     #text {
-     position: absolute;
+     position: relative;
      margin-top: 20px;
      margin-right: 20px;
      margin-left: 20px;
@@ -67,7 +66,10 @@
     
         
     </style>
-    
+    <!--
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+   -->
     </head>
     <body>
         <p>
@@ -92,7 +94,17 @@
         <div id='map'></div>
     </div>
         
-    <div>TextTexty Text</div>
+    <div id='text'>
+        
+    Find your city on the map, using the zoom controls. Click on it to find out the African American population, median income and total population. Use the layer control in the upper right corner of the map <img src="http://i.imgur.com/WlfR99D.jpg"
+    alt="Pdoc" height="25" width="25"/> to switch from the 2010 map to 2000 census data.
+    <p>
+    Note: the popup windows will always give information from the 2010 census.   
+    </p>
+        
+        
+        
+    </div>
     
         
     <script>
@@ -119,12 +131,34 @@
    
     $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/u.geojson', function (data) {
     L.geoJson(data, {
+            /*
+             * Add a popup to each "layer" (shape in the GeoJSON),
+             * in this case the popup simply contains the NAME property.
+             */
+        /*
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup('name: ' + feature.properties.NAMELSAD10 + '<br></br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt'+ '</br>');
+            },
+        
+           onEachFeature: function (feature, layer) {
+               layer.bindPopup('2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt' + '</br>');
+           },
            
+        
+        onEachFeature: function (feature, layer) {
+               layer.bindPopup('<div id="buttwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt' + '</br>' + 'ourbutt');
+           },
+        */   
         
          onEachFeature: function (feature, layer){
                layer.bindPopup('<div id="popwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'Percentage African American: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'Median Household Income: $' + feature.properties.x_Med_Inc + '</br>' + 'Total Population: ' + feature.properties.y_Total_);
            },
-      style: {
+        
+        
+        /*
+        layer.bindPopup('<h1>'+feature.properties.name+'</h1><p>Language: '+feature.properties.language+'</p>');
+*/
+            style: {
                 color: "black",
                 weight: 2,
                 fillOpacity: .05
