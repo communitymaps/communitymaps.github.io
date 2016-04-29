@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>MetroMaps</title>
+        
+    
+        
+    <link rel="stylesheet" href="style.css" media="screen" />
+    <meta charset=utf-8 />    
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+     
+        
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        
+    <style>
+        
+        #box1 {
+        z-index: 100;
+        background-color:blue;
+        height: 50px;
+        width:  50px;
+        float: left;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        margin-left: 75px;
+        }
+        #box2 {
+        z-index: 100;
+        background-color:green;
+        height: 50px;
+        width: 50px;
+        float: left;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        }
+        #box3 {
+        z-index: 100;
+        background-color:yellow;
+        height: 50px;
+        width: 50px;
+        float: left;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        }
+        #box4 {
+        z-index: 100;
+        background-color: purple;
+        height: 50px;
+        width: 50px;
+        float: left;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        }
+        #box5 {
+        z-index: 100;
+        background-color: aqua;
+        height: 50px;
+        width: 50px;
+        float: left;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        margin-right: 75px;
+        }
+        #boxbox {
+        position: absolute;
+        top: 725px;
+        right: 50px;
+        z-index: 101;
+        background-color:bisque;
+        height: 200px;
+        width: 400px;
+        }
+        #boxboxtext {
+        z-index: 102;
+        background-color:bisque;
+        color:red;
+        font-family: serif;
+        font-size: 20px;
+        padding: 10px;
+        }
+        
+        
+    #container {
+      position: relative;
+      height: 520px;
+      margin-top: 20px;
+      margin-right: 20px;
+      margin-left: 20px;
+         }
+        
+    #text {
+     position: relative;
+     margin-top: 20px;
+     margin-right: 20px;
+     margin-left: 20px;
+     margin-bottom: 50px;
+     padding-bottom: 50px;   
+        }
+    
+    #map { 
+      position:absolute; 
+     
+      height: 520px;
+      width:100%; }
+        
+    .leaflet-popup-content-wrapper {
+      background: #707070;
+        }
+
+    .leaflet-popup-tip-container {
+      background: #707070, 0, 0;
+        }
+        
+    .leaflet-popup-tip {
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:20px solid #707070;
+        }
+
+    .leaflet-popup {
+      color: #FDFF06;
+      font-size: 15px;
+        }
+    #popwrap {
+      background-color: #FDFF06;
+      color: #707070;
+      padding: 10px;
+      font-weight: bold;
+        }        
+    
+        
+    </style>
+    
+    </head>
+    <body>
+        <p>
+        <img src="http://i.imgur.com/BBX8X10.jpg?1"
+        alt="Pdoc" height="291" width="100%"/>
+        </p>
+        <p>
+        <a href="http://communitymaps.github.io/index.html" class="button">Home</a>
+        <a href="http://communitymaps.github.io/index.html" class="button">About</a>
+        <a href="http://communitymaps.github.io/dropmetro.html" class="button">Data Downloads</a>
+        </p>
+        <div id="page-wrap">
+        <h1>Mapping Demographics in Metropolitan Detroit</h1>
+        </div>
+        
+    
+        
+        
+        
+   
+    <div id='container'>
+        <div id='map'></div>
+    </div>
+        
+    <div id='boxbox'>
+    <div id='boxboxtext'>This is my Text. How is it? What do you think about Demographics?</div>
+    <div id='box1'></div>
+    <div id='box2'></div>
+    <div id='box3'></div>
+    <div id='box4'></div>
+    <div id='box5'></div>
+        </div> 
+        
+    <div id='text'>
+        
+    Find your city on the map, using the zoom controls. Click on it to find out the African American population, median income and total population. Use the layer control in the upper right corner of the map <img src="http://i.imgur.com/WlfR99D.jpg"
+    alt="Pdoc" height="25" width="25"/> to switch from the 2010 map to 2000 census data.
+    <p>
+    Note: the popup windows will always give information from the 2010 census.   
+    </p>
+    
+        
+        
+   
+        
+    </div>
+    
+        
+    <script>
+    var map = L.map('map').setView([42.431572, -83.294734], 10);
+   
+        
+        
+
+  
+        
+        
+  var CensusA = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinamx0jk000kackp9r7jjbsi/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'     
+  });
+  var CensusB = L.tileLayer('https://api.mapbox.com/styles/v1/mstepniak/cinby8bji005db0nm4fyndkzp/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN0ZXBuaWFrIiwiYSI6ImNpbXF6eHZnNDAwdGF2aG00bHJtbWFweTkifQ.7xXe45mpEC-L6e8kh1fJvA', {
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: '<a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+
+  var baseLayers = {"2010": CensusB, "2000":CensusA};
+  L.control.layers(baseLayers).addTo(map);
+
+   
+    $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/u.geojson', function (data) {
+    L.geoJson(data, {
+            
+         onEachFeature: function (feature, layer){
+               layer.bindPopup('<div id="popwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'Percentage African American: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'Median Household Income: $' + feature.properties.x_Med_Inc + '</br>' + 'Total Population: ' + feature.properties.y_Total_);
+           },
+        
+        
+            style: {
+                color: "black",
+                weight: 2,
+                fillOpacity: .05
+            }
+          }).addTo(map);
+ })
+        
+    </script>
+    
+    
+    </body>
+</html>
