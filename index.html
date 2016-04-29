@@ -16,21 +16,124 @@
         
     <style>
         
+        #text4box1 {
+            z-index: 100;
+            color: black;
+            font-size: 12px;
+            font-family: sans-serif;
+            float: left;
+            margin-top: 19px;
+            margin-left: 25px;
+        }
+        #text4box5 {
+            z-index: 100;
+            color: black;
+            font-size: 12px;
+            font-family: sans-serif;
+            float: left;
+            margin-top: 19px;
+            margin-right: 10px;
+        }
+        
+        #box1 {
+        z-index: 100;
+        background-color:#DCDFE2;
+        opacity: 1;
+        height: 25px;
+        width:  25px;
+        float: left;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 5px;
+        
+        
+        }
+        #box2 {
+        z-index: 100;
+        background-color:#BED2E4;
+        opacity: 1;
+        height: 25px;
+        width: 25px;
+        float: left;
+        margin-top: 15px;
+        margin-bottom: 15px;
+       
+        }
+        #box3 {
+        z-index: 100;
+        background-color:#6CA9CC;
+        opacity: 1;
+        height: 25px;
+        width: 25px;
+        float: left;
+        margin-top: 15px;
+        margin-bottom: 15px;
+       
+        }
+        #box4 {
+        z-index: 100;
+        background-color: #2672AF;
+        opacity: 1;
+        height: 25px;
+        width: 25px;
+        float: left;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        
+        }
+        #box5 {
+        z-index: 100;
+        background-color: #072C64;
+        opacity: 1;
+        height: 25px;
+        width: 25px;
+        float: left;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-right: 5px;
+       
+        }
+       
+        
+        #boxbox {
+        position: absolute;
+        top: 815px;
+        right: 50px;
+        z-index: 98;
+        background-color:rgba(255,255,255,.9);
+        height: 120px;
+        width: 300px;
+        }
+        #boxboxtext {
+        z-index: 102;
+        color: black;
+        font-family: sans-serif;
+        font-size: 15px;
+        padding: 10px;
+        }
+        
+        
     #container {
       position: relative;
       height: 520px;
       margin-top: 20px;
-      margin-right: 20px;
-      margin-left: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+      margin-bottom: 20px;
          }
+    #subhead {
+        font-size: 18px;
+        font-style:italic;
+        }
         
     #text {
      position: relative;
      margin-top: 20px;
      margin-right: 20px;
      margin-left: 20px;
-     margin-bottom: 50px;
-     padding-bottom: 50px;   
+     margin-bottom: 20px;
+     font-family: serif;
+     color: black;
         }
     
     #map { 
@@ -66,10 +169,7 @@
     
         
     </style>
-    <!--
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-   -->
+    
     </head>
     <body>
         <p>
@@ -84,31 +184,50 @@
         <div id="page-wrap">
         <h1>Mapping Demographics in Metropolitan Detroit</h1>
         </div>
-        <!--
-        <div>
-        <iframe width="100%" height="520" frameborder="0" src="https://mstepniak.cartodb.com/viz/8ae436be-0289-11e6-a692-0ecfd53eb7d3/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-   -->
+        
+    
+        
+        
         
    
     <div id='container'>
         <div id='map'></div>
     </div>
         
+    <div id='boxbox'>
+        
+    <div id='boxboxtext'>African American Population by block group, 2000 and 2010 U.S. Census</div>
+    <div id='text4box1'>Under 14%</div>
+   
+    <div id='box1'></div>
+    <div id='box2'></div>
+    <div id='box3'></div>
+    <div id='box4'></div>
+    <div id='box5'></div>
+   
+    <div id='text4box5'>Over 75%</div>
+        
+    </div> 
+       
+    
+    <div id='page-wrap'><h1>
+    Find your city on the map. Click it to find the African American population, median income and total population. Use the control  <img src="http://i.imgur.com/Z37qWsT.jpg"
+    alt="Pdoc" height="25" width="25"/>  in the upper right corner of the map to switch from 2010 to 2000 census data.<br><div id="subhead">Note: the popup windows give information from the 2010 census. Not every city is currently available. More will be added soon.</div>
+    </h1></div>
     <div id='text'>
-        
-    Find your city on the map, using the zoom controls. Click on it to find out the African American population, median income and total population. Use the layer control in the upper right corner of the map <img src="http://i.imgur.com/WlfR99D.jpg"
-    alt="Pdoc" height="25" width="25"/> to switch from the 2010 map to 2000 census data.
-    <p>
-    Note: the popup windows will always give information from the 2010 census.   
-    </p>
+        <i> Note: info windows give information from the 2010 census. Not every city is currently available. More will be added soon. </i>  
+    </div>    
+    
         
         
+   
         
-    </div>
+    
     
         
     <script>
     var map = L.map('map').setView([42.431572, -83.294734], 10);
+   
         
         
 
@@ -131,33 +250,12 @@
    
     $.getJSON('https://cdn.rawgit.com/communitymaps/communitymaps.github.io/master/Geojson/u.geojson', function (data) {
     L.geoJson(data, {
-            /*
-             * Add a popup to each "layer" (shape in the GeoJSON),
-             * in this case the popup simply contains the NAME property.
-             */
-        /*
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup('name: ' + feature.properties.NAMELSAD10 + '<br></br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt'+ '</br>');
-            },
-        
-           onEachFeature: function (feature, layer) {
-               layer.bindPopup('2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt' + '</br>');
-           },
-           
-        
-        onEachFeature: function (feature, layer) {
-               layer.bindPopup('<div id="buttwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'mybutt: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'yourbutt' + '</br>' + 'ourbutt');
-           },
-        */   
-        
+            
          onEachFeature: function (feature, layer){
                layer.bindPopup('<div id="popwrap">2010 Census Data for:' + '<br>' + feature.properties.NAMELSAD10 + '</div></br>' + 'Percentage African American: ' + Math.round(feature.properties.y_Pct_Blk) + '%' + '<br>' + 'Median Household Income: $' + feature.properties.x_Med_Inc + '</br>' + 'Total Population: ' + feature.properties.y_Total_);
            },
         
         
-        /*
-        layer.bindPopup('<h1>'+feature.properties.name+'</h1><p>Language: '+feature.properties.language+'</p>');
-*/
             style: {
                 color: "black",
                 weight: 2,
